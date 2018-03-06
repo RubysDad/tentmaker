@@ -1,16 +1,18 @@
-class GuidesController < ApplicationController
+class GuidesController < ApiController
   before_action :set_guide, only: [:show, :update, :destroy]
 
   # GET /guides
   def index
-    @guides = Guide.all
+    @guides = Guide.select("id, title").all
 
-    render json: @guides
+    render json: @guides.to_json
   end
 
   # GET /guides/1
   def show
-    render json: @guide
+    @guides = Guides.find(params[:id])
+    
+    render json: @guides._to_json(:include => { :instructions => { :only => [ :id, :description ] }})
   end
 
   # POST /guides

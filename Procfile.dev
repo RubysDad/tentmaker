@@ -1,0 +1,2 @@
+web: cd /code/client && PORT=8080 npm start
+api: PORT=8081 && bundle exec rails s -b $IP -p 8081
